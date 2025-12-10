@@ -74,7 +74,7 @@ for t in unique_tickers:
 
     ax1.plot(company_data['Date'], company_data['Close'], label='Precio Cierre', color='#2563eb', linewidth=1.2)
     ax1.set_title(f"Comportamiento Histórico: {t}", fontsize=16, fontweight='bold', pad=15)
-    ax1.set_ylabel("Precio (CLP)", fontsize=12)
+    ax1.set_ylabel("Precio (COP)", fontsize=12)
     ax1.legend(loc='upper left', frameon=True, facecolor='white', framealpha=0.9)
     ax1.grid(True, which='major', linestyle='-', alpha=0.6)
 
