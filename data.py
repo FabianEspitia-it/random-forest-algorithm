@@ -1,9 +1,8 @@
-"""Download, clean and visualize price and volume for selected BVC tickers.
+"""Download, clean and visualize price series for selected BVC tickers.
 
 This script pulls adjusted daily data via yfinance, keeps only the relevant
-columns and produces two vertically stacked plots per ticker:
+columns and produces a single plot per ticker:
 1) Close price trend
-2) Traded volume (area chart)
 """
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -67,9 +66,8 @@ for t in unique_tickers:
     # Ensure 'Date' is proper datetime for Matplotlib formatters and locators.
     company_data['Date'] = pd.to_datetime(company_data['Date'])
 
-    # Create two vertically stacked axes: price (top) and volume (bottom).
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 8), sharex=True,
-                                   gridspec_kw={'height_ratios': [3, 1]})
+    # Create a single axes for price visualization.
+    fig, ax1 = plt.subplots(figsize=(14, 8))
 
 
     ax1.plot(company_data['Date'], company_data['Close'], label='Precio Cierre', color='#2563eb', linewidth=1.2)
@@ -77,20 +75,6 @@ for t in unique_tickers:
     ax1.set_ylabel("Precio (COP)", fontsize=12)
     ax1.legend(loc='upper left', frameon=True, facecolor='white', framealpha=0.9)
     ax1.grid(True, which='major', linestyle='-', alpha=0.6)
-
-
-    ax2.fill_between(company_data['Date'], company_data['Volume'], 0,
-                     color='#f97316', alpha=0.8, label='Volumen')
-
-    ax2.set_ylabel("Traded Volume", fontsize=12)
-    ax2.legend(loc='upper left', frameon=True, facecolor='white', framealpha=0.9)
-    ax2.grid(True, which='major', linestyle='--', alpha=0.5)
-
-    # Major ticks every 2 years, labeled with the year; minor ticks every 6 months.
-    ax2.xaxis.set_major_locator(mdates.YearLocator(2)) 
-    ax2.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-
-    ax2.xaxis.set_minor_locator(mdates.MonthLocator(interval=6))
 
     # Improve readability of dense date labels.
     plt.xticks(rotation=45, ha='right')
