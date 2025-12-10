@@ -115,8 +115,3 @@ Para usar otros activos, reemplace los símbolos en `tickers_bvc`. Los sufijos `
 - Datos: `yfinance`
 - Modelado: `scikit-learn`
 - Manipulación y gráficos: `pandas`, `matplotlib`
-
-
-## Licencia
-
-Sin licencia explícita en el repositorio. Si planea distribuir/modificar, considere añadir una licencia (por ejemplo, MIT).
